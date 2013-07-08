@@ -47,6 +47,12 @@
 #include <linux/mfd/tps65910.h>
 #include <linux/regulator/act8846.h>
 #include <linux/regulator/rk29-pwm-regulator.h>
+
+//Thanks to Sam321 in freaktab for share overclock capability
+//#define OVERCLOCK_CPU
+//#define OVERCLOCK_RAM
+//#define OVERCLOCK_GPU
+
 #if defined(CONFIG_CT36X_TS)
 #include <linux/ct36x.h>
 #endif
@@ -1463,9 +1469,9 @@ static struct pmu_info  act8846_dcdc_info[] = {
 		#endif
 	},
 	{
-		.name          = "act_dcdc4",   //vccio
-		.min_uv          = 3300000,
-		.max_uv         = 3300000,
+		.name          = "act_dcdc4",   //vccio //modded by leolas orig 3300000
+		.min_uv          = 3000000,
+		.max_uv         = 3000000,
 		#ifdef CONFIG_ACT8846_SUPPORT_RESET
 		.suspend_vol  =  3000000,
 		#else
@@ -1501,9 +1507,9 @@ static  struct pmu_info  act8846_ldo_info[] = {
 		.max_uv         = 3300000,
 	},
 	{
-		.name          = "act_ldo6",   //vcc_jetta
-		.min_uv          = 1800000,
-		.max_uv         = 1800000,
+		.name          = "act_ldo6",   //vcc_jetta //leolas modded orig 1800000
+		.min_uv          = 3300000,
+		.max_uv         = 3300000,
 	},
 	{
 		.name          = "act_ldo7",   //vcc18
@@ -2071,7 +2077,18 @@ static void __init rk30_reserve(void)
  * comments	: min arm/logic voltage
  */
 static struct cpufreq_frequency_table dvfs_arm_table[] = {
-
+#ifdef OVERCLOCK_CPU
+        {.frequency = 312 * 1000,       .index = 875 * 1000},
+        {.frequency = 504 * 1000,       .index = 900 * 1000},
+        {.frequency = 816 * 1000,       .index = 975 * 1000},
+        {.frequency = 1008 * 1000,      .index = 1050 * 1000},
+        {.frequency = 1200 * 1000,      .index = 1125 * 1000},
+        {.frequency = 1416 * 1000,      .index = 1225 * 1000},
+        {.frequency = 1608 * 1000,      .index = 1325 * 1000},
+        {.frequency = 1704 * 1000,      .index = 1350 * 1000},
+        {.frequency = 1800 * 1000,      .index = 1375 * 1000},        
+        //{.frequency = 1920 * 1000,      .index = 1375 * 1000},
+#else
         {.frequency = 312 * 1000,       .index = 900 * 1000},
         {.frequency = 504 * 1000,       .index = 925 * 1000},
         {.frequency = 816 * 1000,       .index = 1000 * 1000},
@@ -2079,26 +2096,43 @@ static struct cpufreq_frequency_table dvfs_arm_table[] = {
         {.frequency = 1200 * 1000,      .index = 1150 * 1000},
         {.frequency = 1416 * 1000,      .index = 1250 * 1000},
         {.frequency = 1608 * 1000,      .index = 1350 * 1000},
-
-
+#endif
 	{.frequency = CPUFREQ_TABLE_END},
 };
 
 static struct cpufreq_frequency_table dvfs_gpu_table[] = {
-	   {.frequency = 133 * 1000,       .index = 975 * 1000},
+// other limit need adjusting for this to work
+#ifdef OVERCLOCK_GPU
+       {.frequency = 133 * 1000,       .index = 975 * 1000},
+       {.frequency = 200 * 1000,       .index = 1000 * 1000},  
+       {.frequency = 266 * 1000,       .index = 1025 * 1000},  
+       {.frequency = 300 * 1000,       .index = 1050 * 1000},  
+       {.frequency = 400 * 1000,       .index = 1100 * 1000},
+       {.frequency = 600 * 1000,       .index = 1150 * 1000},
+       {.frequency = 666 * 1000,       .index = 1200 * 1000},
+       //{.frequency = 700 * 1000,       .index = 1250 * 1000},
+
+#else
+       {.frequency = 133 * 1000,       .index = 975 * 1000},
        //{.frequency = 150 * 1000,       .index = 975 * 1000},
        {.frequency = 200 * 1000,       .index = 1000 * 1000},  
        {.frequency = 266 * 1000,       .index = 1025 * 1000},  
        {.frequency = 300 * 1000,       .index = 1050 * 1000},  
        {.frequency = 400 * 1000,       .index = 1100 * 1000},
        {.frequency = 600 * 1000,       .index = 1250 * 1000},
+#endif
 	{.frequency = CPUFREQ_TABLE_END},
 };
 
 static struct cpufreq_frequency_table dvfs_ddr_table[] = {
-	//{.frequency = 200 * 1000 + DDR_FREQ_SUSPEND,    .index = 950 * 1000},
+#ifdef OVERCLOCK_RAM
+	{.frequency = 400 * 1000 + DDR_FREQ_VIDEO,      .index = 1100 * 1000},
+	{.frequency = 720 * 1000 + DDR_FREQ_NORMAL,     .index = 1200 * 1000},
+#else
+    //{.frequency = 200 * 1000 + DDR_FREQ_SUSPEND,    .index = 950 * 1000},
 	{.frequency = 300 * 1000 + DDR_FREQ_VIDEO,      .index = 1000 * 1000},
 	{.frequency = 360 * 1000 + DDR_FREQ_NORMAL,     .index = 1100 * 1000},
+#endif
 	{.frequency = CPUFREQ_TABLE_END},
 };
 
