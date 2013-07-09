@@ -34,7 +34,7 @@
 #include "rk3188_lcdc.h"
 
 
-#define GALLAND_CHANGED //Galland to fix FRAMEBUFFER_CONSOLE on rk30 and rk31 1
+//#define GALLAND_CHANGED //Galland to fix FRAMEBUFFER_CONSOLE on rk30 and rk31 1//leolas modded
 
 
 static int dbg_thresd = 2;

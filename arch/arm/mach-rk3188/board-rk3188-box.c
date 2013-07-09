@@ -49,8 +49,8 @@
 #include <linux/regulator/rk29-pwm-regulator.h>
 
 //Thanks to Sam321 in freaktab for share overclock capability
-//#define OVERCLOCK_CPU
-//#define OVERCLOCK_RAM
+#define OVERCLOCK_CPU
+#define OVERCLOCK_RAM
 //#define OVERCLOCK_GPU
 
 #if defined(CONFIG_CT36X_TS)

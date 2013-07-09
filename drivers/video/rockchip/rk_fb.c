@@ -45,7 +45,7 @@ void rk29_backlight_set(bool on);
 bool rk29_get_backlight_status(void);
 
 #define OLEGK0_CHANGED 1
-#define GALLAND_CHANGED 1 //define it to fix FRAMEBUFFER_CONSOLE on rk30 and rk31
+//#define GALLAND_CHANGED 1 //define it to fix FRAMEBUFFER_CONSOLE on rk30 and rk31//leolas modded
 
 
 #ifdef	CONFIG_FB_MIRRORING
@@ -306,6 +306,7 @@ static int rk_fb_ioctl(struct fb_info *info, unsigned int cmd,unsigned long arg)
    
 	//$_rbox_$_modify_$ zhengyang modified for box display system
 	#if defined(CONFIG_DUAL_LCDC_DUAL_DISP_IN_KERNEL)
+	struct rk_fb_inf *inf = dev_get_drvdata(info->device);
 	struct fb_info * info2;
 	struct rk_lcdc_device_driver * dev_drv1;
 	#endif
