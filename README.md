@@ -13,5 +13,5 @@ Sources taken from Galland, thanks to him too for his work in this sources.
 
 Thanks to Sam321 for share the overclock for this devices.
 
-conf.leolas.1 is  a test config for a 1080p kernel. BT didnt work yet. CPU and RAM are overclocked.
-
+conf.leolas.1080p is  a test config for a 1080p kernel. BT didnt work yet. CPU and RAM are overclocked.
+conf.leolas.720p is  a test config for a 720p kernel. BT didnt work yet. CPU and RAM are overclocked.

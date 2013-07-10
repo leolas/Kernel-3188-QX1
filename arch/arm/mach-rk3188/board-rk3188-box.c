@@ -51,7 +51,7 @@
 //Thanks to Sam321 in freaktab for share overclock capability
 #define OVERCLOCK_CPU
 #define OVERCLOCK_RAM
-//#define OVERCLOCK_GPU
+#define OVERCLOCK_GPU
 
 #if defined(CONFIG_CT36X_TS)
 #include <linux/ct36x.h>
@@ -2108,8 +2108,8 @@ static struct cpufreq_frequency_table dvfs_gpu_table[] = {
        {.frequency = 266 * 1000,       .index = 1025 * 1000},  
        {.frequency = 300 * 1000,       .index = 1050 * 1000},  
        {.frequency = 400 * 1000,       .index = 1100 * 1000},
-       {.frequency = 600 * 1000,       .index = 1150 * 1000},
-       {.frequency = 666 * 1000,       .index = 1200 * 1000},
+       {.frequency = 600 * 1000,       .index = 1200 * 1000},//leolas stock 1150
+       //{.frequency = 666 * 1000,       .index = 1200 * 1000},
        //{.frequency = 700 * 1000,       .index = 1250 * 1000},
 
 #else
