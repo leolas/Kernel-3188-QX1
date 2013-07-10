@@ -37,7 +37,7 @@
 //#define GALLAND_CHANGED //Galland to fix FRAMEBUFFER_CONSOLE on rk30 and rk31 1//leolas modded
 
 
-static int dbg_thresd = 2;
+static int dbg_thresd = 0;//modded leolas to remove logs stock value 2
 module_param(dbg_thresd, int, S_IRUGO|S_IWUSR);
 #define DBG(level,x...) do { 			\
 	if(unlikely(dbg_thresd >= level)) 	\

@@ -344,7 +344,7 @@ static int win0_open(struct rk30_lcdc_device *lcdc_dev,bool open)
 	spin_unlock(&lcdc_dev->reg_lock);
 	
 	
-	printk(KERN_INFO "lcdc%d win0 %s\n",lcdc_dev->id,open?"open":"closed");
+//	printk(KERN_INFO "lcdc%d win0 %s\n",lcdc_dev->id,open?"open":"closed"); //leolas modded remove logs
 	return 0;
 }
 static int win1_open(struct rk30_lcdc_device *lcdc_dev,bool open)
@@ -377,7 +377,7 @@ static int win1_open(struct rk30_lcdc_device *lcdc_dev,bool open)
 	}
 	spin_unlock(&lcdc_dev->reg_lock);
 	
-	printk(KERN_INFO "lcdc%d win1 %s\n",lcdc_dev->id,open?"open":"closed");
+//	printk(KERN_INFO "lcdc%d win1 %s\n",lcdc_dev->id,open?"open":"closed");//leolas modded remove logs
 	return 0;
 }
 
@@ -413,7 +413,7 @@ static int win2_open(struct rk30_lcdc_device *lcdc_dev,bool open)
 	}
 	spin_unlock(&lcdc_dev->reg_lock);
 	
-	printk(KERN_INFO "lcdc%d win2 %s\n",lcdc_dev->id,open?"open":"closed");
+//	printk(KERN_INFO "lcdc%d win2 %s\n",lcdc_dev->id,open?"open":"closed");//leolas modded remove logs
 	return 0;
 }
 
@@ -897,7 +897,7 @@ static int rk30_lcdc_open(struct rk_lcdc_device_driver *dev_drv,int layer_id,boo
 	int v;
 	struct rk30_lcdc_device *lcdc_dev = container_of(dev_drv,struct rk30_lcdc_device,driver);
 	
-	printk("%s>>open:%d>>cnt:%d\n",__func__,open,lcdc_dev->atv_layer_cnt);
+//	printk("%s>>open:%d>>cnt:%d\n",__func__,open,lcdc_dev->atv_layer_cnt);//leolas modded remove logs
 	if((open) && (!lcdc_dev->atv_layer_cnt)) //enable clk,when first layer open
 	{
 #ifndef GALLAND_ENABLE_OLD_CLOCKING
